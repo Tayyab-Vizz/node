@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
 
       - name: Push Docker image to Docker Hub
-        run: |
+        run: 
           docker tag t-vizz:$(date +%s) ${{ secrets.USERNAME }}/t-vizz:latest
           docker push ${{ secrets.MY_PASSWORD }}/t-vizz:latest
 
