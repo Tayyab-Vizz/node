@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag t-vizz:$(date +%s)
+        run: docker build . --file Dockerfile --tag project1:$(date +%s)
 
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
 
       - name: Tag Docker image
-        run: docker tag t-vizz:$(date +%s) ${{ secrets.USERNAME }}/t-vizz:latest
+        run: docker tag project1:$(date +%s) ${{ secrets.USERNAME }}/project1:latest
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.USERNAME }}/t-vizz:latest
+        run: docker push ${{ secrets.USERNAME }}/project1:latest
