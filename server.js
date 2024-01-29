@@ -8,3 +8,5 @@ app.get('/', (req, res) => {
 });
 app.listen(PORT, HOST);
 console.log(`Running on ${PORT}`);
+
+console.log("Hello");
