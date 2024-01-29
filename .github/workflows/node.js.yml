@@ -20,8 +20,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-      - name: clearn
-        run: npm cache clean
+     # - name: clean
+     #   run: npm cache clean
 
       - name: Run Node.js Script
         run: node app.js
