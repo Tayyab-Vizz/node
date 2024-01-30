@@ -3,8 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  #pull_request:
+  #  branches: [ "main" ]
 
 jobs:
 
@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
 
       - name: Tag Docker image
-        run: docker tag node:1706553126:$(date +%s) ${{ secrets.USERNAME }}/node:latest
+        run: docker tag node:latest
   
 
       - name: Push Docker image to Docker Hub
