@@ -15,7 +15,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build -t img . --file Dockerfile --tag node:$(date +%s)
+          docker build -t img . --file Dockerfile #--tag node:$(date +%s)
           docker images
 
       - name: Log in to Docker Hub
@@ -25,7 +25,7 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
 
       - name: Tag Docker image
-        run: docker image tag node:$(date +%s) ${{ secrets.USERNAME }}/new_img:latest
+        run: docker image tag node:latest
 
         #run: docker image tag node:$(date +%s) new_img:latest
 
