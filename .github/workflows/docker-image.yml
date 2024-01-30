@@ -15,7 +15,7 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build . --file Dockerfile --tag node:$(date +%s)
+          docker build -t img . --file Dockerfile --tag node:$(date +%s)
           docker images
 
       - name: Log in to Docker Hub
