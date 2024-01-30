@@ -3,12 +3,13 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-    tags:
-      - '*'
+    
 jobs:
 
   build_and_push:
     runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.ref }}
     
     steps:
       - name: Checkout code
@@ -16,9 +17,8 @@ jobs:
       
       - name: Build the Docker image
         run: |
-          TAG=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-          docker build -t dockerit571/project1:${TAG} . --file Dockerfile
           #docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
+          docker build -t dockerit571/project1:${TAG} . --file Dockerfile
           docker images
 
       - name: Log in to Docker Hub
