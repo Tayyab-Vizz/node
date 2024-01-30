@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag $(date +%s)
+        run: docker build . --file Dockerfile --tag:$(date +%s)
       - name: List Docker images
         run: docker images 
         
@@ -30,12 +30,13 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
 
-      #- name: Tag Docker image
+      - name: Tag Docker image
+        run: docker image tag node:$(date +%s) new_img:latest
+
         #run: docker tag node:1706607252 project:tagname
        # run: docker tag 1706607965 node:latest
 
       - name: Push Docker image to Docker Hub
-        run: docker push node:$(date +%s)
-
+        run: docker push new_img:latest
 
       #  run: docker push ${{ secrets.USERNAME }}/node:latest
