@@ -30,8 +30,8 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
 
       - name: Tag Docker image
-        run: docker tag node:1706607252 project:tagname
-
+        #run: docker tag node:1706607252 project:tagname
+        run: docker tag 1706607965 node:latest
 
       - name: Push Docker image to Docker Hub
         run: docker push node:1706607252
