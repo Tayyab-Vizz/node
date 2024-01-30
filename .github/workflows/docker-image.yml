@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag node:dockerit571/noe:latest #$(date +%s)
+        run: docker build . --file Dockerfile --tag node:dockerit571/node:latest #$(date +%s)
       - name: List Docker images
         run: docker images 
         
