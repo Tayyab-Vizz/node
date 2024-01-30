@@ -17,7 +17,7 @@ jobs:
         run: |
           #docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
           export image_version=v2.0.0
-          docker build -t imagename:${image_version} . --file Dockerfile
+          docker build -t dockerit571/project1:${image_version} . --file Dockerfile
           docker images
 
       - name: Log in to Docker Hub
