@@ -31,4 +31,4 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         #run: docker push node:latest
-        run: docker push dockerit571/project1:newimg
+        run: docker push dockerit571/project1:img
