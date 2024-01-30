@@ -31,4 +31,4 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         #run: docker push node:latest
-        run: docker push ${{ secrets.USERNAME }}/my_img:latest
+        run: docker push my_img:latest
