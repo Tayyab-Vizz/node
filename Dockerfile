@@ -1,7 +1,6 @@
 FROM node:11
 
-ENV APP_VERSION=$DOCKER_TAG
-RUN echo "Bulding Docker image version: $APP_VERSION"
+
 
 # Create app directory
 WORKDIR /usr/src/app
