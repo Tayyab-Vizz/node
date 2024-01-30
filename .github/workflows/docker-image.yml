@@ -3,21 +3,22 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-
+    tags:
+      - '*'
 jobs:
 
   build_and_push:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+      
       - name: Build the Docker image
         run: |
+          TAG=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+          docker build -t dockerit571/project1:${TAG} . --file Dockerfile
           #docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
-          export image_version=v2.0.0
-          docker build -t dockerit571/project1:${image_version} . --file Dockerfile
           docker images
 
       - name: Log in to Docker Hub
@@ -28,4 +29,5 @@ jobs:
 
       - name: Push Docker image to Docker Hub
         #run: docker push node:latest
-        run: docker push dockerit571/project1:latest
+        #run: docker push dockerit571/project1:latest
+        run: docker push dockerit571/project1:${TAG}
