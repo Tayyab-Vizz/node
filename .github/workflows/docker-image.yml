@@ -3,7 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-
+env:
+  IMAGE_TAG: 1.0.${{ github.run_number }}
 jobs:
 
   build_and_push:
@@ -23,13 +24,9 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
-        
-      - name: Use tag
-        uses: anothrNick/github-tag-action@1.17.2
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     
            
 
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:$GITHUB_TOKEN
+        run: docker push dockerit571/project1:$IMAGE_TAG
         #run: docker push dockerit571/project1:$GITHUB_TOKEN
