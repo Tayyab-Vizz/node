@@ -31,5 +31,5 @@ jobs:
            
 
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:$TAG
+        run: docker push dockerit571/project1:$GITHUB_TOKEN
         #run: docker push dockerit571/project1:$GITHUB_TOKEN
