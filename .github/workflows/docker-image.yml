@@ -4,10 +4,8 @@ on:
   push:
     branches: [ "main" ]
 
-env:
-  IMAGE_TAG: "dockerit571/project1:${{ inputs.tag }}"
-
 jobs:
+
   build_and_push:
     runs-on: ubuntu-latest
     
@@ -15,21 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      #- name: Build the Docker image
-       # run: |
-       #   docker build -t dockerit571/project1:latest . --file Dockerfile
-       #   docker images
+      - name: Build the Docker image
+        run: |
+          docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
+          docker images
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
-
-      - name: Build and push Docker image to Docker Hub
-        uses: docker/build-push-action@v3
-        with:
-          tags: ${{ env.IMAGE_TAG }}
-
+        
+      - uses: docker/tag-action@v3
+         env:|
+          tag:"$latest"
+        
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:${{ env.IMAGE_TAG }}
+        run: docker push dockerit571/project1:$tag
