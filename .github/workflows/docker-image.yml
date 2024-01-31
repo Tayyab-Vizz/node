@@ -16,7 +16,7 @@ jobs:
       
       - name: Build the Docker image
         run: |
-          docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
+          docker build -t dockerit571/project1:1.0 . --file Dockerfile #--tag node:$(date +%s)
           docker images
 
       - name: Log in to Docker Hub
