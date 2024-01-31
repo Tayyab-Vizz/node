@@ -8,8 +8,6 @@ jobs:
 
   build_and_push:
     runs-on: ubuntu-latest
-    env:
-      TAG: ${{ github.ref }}
     
     steps:
       - name: Checkout code
@@ -17,8 +15,7 @@ jobs:
       
       - name: Build the Docker image
         run: |
-          #docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
-          docker build -t dockerit571/project1:${TAG} . --file Dockerfile
+          docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
           docker images
 
       - name: Log in to Docker Hub
@@ -26,8 +23,14 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
-
+      - name: tag
+        uses: anthrNick/github-tag-action@1.17.2
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
+      - name: Get the newly created tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "Newly created tag: $TAG"
       - name: Push Docker image to Docker Hub
-        #run: docker push node:latest
-        #run: docker push dockerit571/project1:latest
         run: docker push dockerit571/project1:${TAG}
