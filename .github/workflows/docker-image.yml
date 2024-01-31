@@ -3,20 +3,20 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
-env:
-  IMAGE_TAG: 1.0.${{ github.run_number }}
+
 jobs:
 
   build_and_push:
     runs-on: ubuntu-latest
-    
+    env:
+      TAG: latest 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
       - name: Build the Docker image
         run: |
-          docker build -t dockerit571/project1:1.0 . --file Dockerfile #--tag node:$(date +%s)
+          docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
           docker images
 
       - name: Log in to Docker Hub
@@ -24,9 +24,10 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
-     
-           
+      - name: Tag Docker image
+        run: docker tag dockerit571/project1:${{ env.TAG }} dockerit571/project1:${{ env.TAG }}
+
 
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:$IMAGE_TAG
+        run: docker push dockerit571/project1:${{ env.TAG }}
         #run: docker push dockerit571/project1:$GITHUB_TOKEN
