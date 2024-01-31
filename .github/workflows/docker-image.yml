@@ -24,9 +24,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
         
-      - uses: docker/tags-action@v1
-         env:|
-          tag:"$latest"
-        
+      - name: Use docker/tags-action to set environment variable
+        run: echo "TAG=$(echo ${GITHUB_REF/refs\/tags\//})" >> $GITHUB_ENV
+
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:$tag
+        run: docker push dockerit571/project1:$TAG
+        #run: docker push dockerit571/project1:$ta
