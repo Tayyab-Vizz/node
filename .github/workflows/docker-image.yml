@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
         
-      - uses: docker/tag-action@v1
+      - uses: docker/tags-action@v1
          env:|
           tag:"$latest"
         
