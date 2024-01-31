@@ -35,4 +35,5 @@ jobs:
           asset_path: ./project1
     
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:$GITHUB_TOKEN
+        run: TAG=$(echo "${GITHUB_REF/refs\/tags\//}")
+             docker push dockerit571/project1:$TAG
