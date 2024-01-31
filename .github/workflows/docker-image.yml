@@ -27,7 +27,7 @@ jobs:
       - name: Use tag
         uses: anothrNick/github-tag-action@1.17.2
         env:
-           GITHUB_TOKEN: ${{ secrests.GITHUB_TOKEN }}
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            
 
       - name: Push Docker image to Docker Hub
