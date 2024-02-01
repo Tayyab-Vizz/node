@@ -16,18 +16,18 @@ jobs:
       
       - name: Build the Docker image
         run: |
-          docker build -t dockerit571/project1:${{ github.sha }} . --file Dockerfile 
+          docker build -t dockerit571/project1:${{ TAG }} . --file Dockerfile 
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.MY_PASSWORD }}
-      - name: Tag Docker image
-        run: docker tag dockerit571/project1:${{ env.TAG }} dockerit571/project1:${{ github.sha }}
+      #- name: Tag Docker image
+        #run: docker tag dockerit571/project1:${{ env.TAG }} dockerit571/project1:${{ env.TAG }}
 
 
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:${{ github.sha }} #${{ env.TAG }}
+        run: docker push dockerit571/project1:${{ TAG }} #${{ env.TAG }}
         
         #run: docker push dockerit571/project1:$GITHUB_TOKEN
