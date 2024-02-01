@@ -9,15 +9,14 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     env:
-      TAG: latest # {{
+      TAG: ${{ github.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
       - name: Build the Docker image
         run: |
-          docker build -t dockerit571/project1:latest . --file Dockerfile #--tag node:$(date +%s)
-          docker images
+          docker build -t dockerit571/project1:${{ github.sha }} . --file Dockerfile 
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -29,5 +28,6 @@ jobs:
 
 
       - name: Push Docker image to Docker Hub
-        run: docker push dockerit571/project1:${{ env.TAG }}
+        run: docker push dockerit571/project1:${{ github.sha }} #${{ env.TAG }}
+        
         #run: docker push dockerit571/project1:$GITHUB_TOKEN
